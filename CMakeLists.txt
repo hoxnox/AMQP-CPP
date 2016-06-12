@@ -25,7 +25,12 @@ add_subdirectory(src)
 add_subdirectory(include)
 
 add_library(amqp-cpp STATIC ${SRCS})
-target_include_directories(amqp-cpp SYSTEM PUBLIC ${PROJECT_SOURCE_DIR})
+# cmake 2.8.11 does not support SYSTEM option
+if ("${CMAKE_VERSION}" VERSION_LESS "2.8.12")
+    target_include_directories(amqp-cpp PUBLIC "${PROJECT_SOURCE_DIR}")
+else()
+    target_include_directories(amqp-cpp SYSTEM PUBLIC "${PROJECT_SOURCE_DIR}")
+endif()
 install(TARGETS amqp-cpp
         ARCHIVE DESTINATION lib
 )

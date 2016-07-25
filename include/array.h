@@ -211,15 +211,6 @@ public:
         stream << ")";
     }
 
-    /**
-     *  Cast to array (compiler will probably never call this method)
-     *  @return Array
-     */
-    virtual operator const Array& () const override
-    {
-        // this already is an array, so no cast is necessary
-        return *this;
-    }
 };
 
 /**
